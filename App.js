@@ -3,6 +3,14 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
+    const getDictionaryDefinition = word => {
+        //TODO: make async/await
+        const APIKey = getDictionaryAPI();
+        const ref = "collegiate";
+        const uri = `https://dictionaryapi.com/api/v3/references/${ref}/json/${word}?key=${APIKey}`;
+        
+    }
+
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
@@ -10,8 +18,6 @@ export default function App() {
     </View>
   );
 }
-
-//TODO: before deployment, hide API keys better
 
 const styles = StyleSheet.create({
   container: {
