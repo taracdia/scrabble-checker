@@ -11,6 +11,8 @@ export default function App() {
   );
 }
 
+//TODO: before deployment, hide API keys better
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
