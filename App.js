@@ -1,6 +1,15 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+import {
+	StyleSheet,
+	Text,
+	View,
+	Button,
+	TextInput,
+	Image,
+	Linking,
+	TouchableHighlight,
+} from "react-native";
 import { REACT_APP_DICTIONARY_API_KEY } from "@env";
 
 export default function App() {
@@ -12,7 +21,8 @@ export default function App() {
 	const getDictionaryDefinition = () => {
 		//TODO: make async/await
 		const ref = "collegiate";
-		const uri = `https://dictionaryapi.com/api/v3/references/${ref}/json/${possibleWord}?key=${REACT_APP_DICTIONARY_API_KEY}`;
+		// const uri = `https://dictionaryapi.com/api/v3/references/${ref}/json/${possibleWord}?key=${REACT_APP_DICTIONARY_API_KEY}`;
+		const uri = `https://api.wordnik.com/v4/word.json/hello/scrabbleScore?api_key=${REACT_APP_DICTIONARY_API_KEY}`;
 		// fetch(uri);
 		console.log(uri);
 	};
@@ -42,6 +52,16 @@ export default function App() {
 			></Button>
 			<StatusBar style="auto" />
 			<StatusEmblem />
+			<Text>https://www.wordnik.com/words/{possibleWord}</Text>
+			<TouchableHighlight
+				onPress={() => Linking.openURL("https://website.com")}
+			>
+				<Image
+					source={require("./assets/wordnik.png")}
+					style={styles.logo}
+					resizeMode="contain"
+				/>
+			</TouchableHighlight>
 		</View>
 	);
 }
@@ -52,5 +72,9 @@ const styles = StyleSheet.create({
 		backgroundColor: "#fff",
 		alignItems: "center",
 		justifyContent: "center",
+	},
+	logo: {
+		width: 115,
+		height: 32,
 	},
 });
