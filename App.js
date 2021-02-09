@@ -6,12 +6,13 @@ import {
 	View,
 	Button,
 	TextInput,
-	Image,
-	Linking,
-	TouchableHighlight,
 	Keyboard,
 } from "react-native";
 import { REACT_APP_DICTIONARY_API_KEY } from "@env";
+
+import Attribution from "./components/Attribution";
+import StatusEmblem from "./components/StatusEmblem";
+import Definitions from "./components/Definitions";
 
 export default function App() {
 	const [dictDef, setDictDef] = React.useState([]);
@@ -23,6 +24,7 @@ export default function App() {
 	const [hasFirstSearch, setHasFirstSearch] = React.useState(false);
 
 	const dummyButton = () => {
+		setHasFirstSearch(true);
 		const dummyVals = [
 			{
 				id: "B5042200-1",
@@ -255,7 +257,6 @@ export default function App() {
 	};
 
 	const clickButton = () => {
-		//TODO: unhide statusemblem, hide keyboard
 		setHasFirstSearch(true);
 		Keyboard.dismiss();
 		//Reset states
@@ -273,7 +274,31 @@ export default function App() {
 					//This means it is a valid scrabble word
 					setIsWord(true);
 					//Retrieve and display the definition
-					findDefinition();
+					fetch(
+						`https://api.wordnik.com/v4/word.json/${possibleWord}/definitions?limit=10&includeRelated=false&useCanonical=true&includeTags=false&api_key=${REACT_APP_DICTIONARY_API_KEY}`
+					)
+						.then(res => res.json())
+						.then(res => {
+							if (res.cod == 200) {
+								setIsLoading(false);
+								//Using reduce rather than map so that undefined values are not included
+								setDictDef(
+									res.reduce((result, val) => {
+										if (val.text) {
+											result.push(val.text);
+										}
+										return result;
+									}, [])
+								);
+							} else if (res.cod != 404) {
+								throw new Error();
+							}
+						})
+						.catch(err => {
+							setIsError(true);
+							setIsLoading(false);
+							console.log(err.message);
+						});
 				} else if (res.cod == 404) {
 					//This means it isn't a valid scrabble word
 					setIsLoading(false);
@@ -288,51 +313,6 @@ export default function App() {
 			});
 	};
 
-	const findDefinition = () => {
-		fetch(
-			`https://api.wordnik.com/v4/word.json/${possibleWord}/definitions?limit=10&includeRelated=false&useCanonical=true&includeTags=false&api_key=${REACT_APP_DICTIONARY_API_KEY}`
-		)
-			.then(res => res.json())
-			.then(res => {
-				if (res.cod == 200) {
-					setIsLoading(false);
-					//Using reduce rather than map so that undefined values are not included
-					setDictDef(
-						res.reduce((result, val) => {
-							if (val.text) {
-								result.push(val.text);
-							}
-							return result;
-						}, [])
-					);
-				} else if (res.cod == 404) {
-					//Not found in dictionary
-					setDictDef(["There is no definition found."]);
-				} else {
-					throw new Error();
-				}
-			})
-			.catch(err => {
-				setIsError(true);
-				setIsLoading(false);
-				console.log(err.message);
-			});
-	};
-
-	const StatusEmblem = () => {
-		if (!hasFirstSearch) {
-			return null;
-		} else if (isError) {
-			return <Text style={styles.text}>Error</Text>;
-		} else if (isLoading) {
-			return <Text style={styles.text}>Loading</Text>;
-		} else if (isWord) {
-			return <Text style={styles.text}>Yes!</Text>;
-		} else {
-			return <Text style={styles.text}>No!</Text>;
-		}
-	};
-
 	return (
 		<View style={styles.container}>
 			<TextInput
@@ -342,24 +322,19 @@ export default function App() {
 				style={styles.text}
 			/>
 			<Button title="search" onPress={() => dummyButton()}></Button>
+			<StatusEmblem
+				isError={isError}
+				isLoading={isLoading}
+				isWord={isWord}
+				hasFirstSearch={hasFirstSearch}
+			/>
+			<Definitions hasFirstSearch={hasFirstSearch} dictDef={dictDef} />
+
+			<Attribution
+				possibleWord={possibleWord}
+				hasFirstSearch={hasFirstSearch}
+			/>
 			<StatusBar style="auto" />
-			<StatusEmblem />
-			<Text style={styles.text}>Definitions:</Text>
-			{dictDef.map(def => (
-				<Text style={styles.text}>{def}</Text>
-			))}
-			<Text style={styles.text}>
-				https://www.wordnik.com/words/{possibleWord}
-			</Text>
-			<TouchableHighlight
-				onPress={() => Linking.openURL("https://wordnik.com")}
-			>
-				<Image
-					source={require("./assets/wordnik.png")}
-					style={styles.logo}
-					resizeMode="contain"
-				/>
-			</TouchableHighlight>
 		</View>
 	);
 }
@@ -373,9 +348,5 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		color: "#fff",
-	},
-	logo: {
-		width: 115,
-		height: 32,
 	},
 });
