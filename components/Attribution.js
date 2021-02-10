@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Text, View, Image, Linking, TouchableHighlight } from "react-native";
 
@@ -8,7 +7,7 @@ export default function Attribution({ possibleWord, hasFirstSearch }) {
 	const AttLink = () => {
 		if (hasFirstSearch) {
 			return (
-				<Text style={Styles.text}>
+				<Text style={[Styles.white]}>
 					https://www.wordnik.com/words/{possibleWord}
 				</Text>
 			);
@@ -21,6 +20,7 @@ export default function Attribution({ possibleWord, hasFirstSearch }) {
 			<AttLink />
 			<TouchableHighlight
 				onPress={() => Linking.openURL("https://wordnik.com")}
+				style={Styles.hzCenter}
 			>
 				<Image
 					source={require("../assets/wordnik.png")}
