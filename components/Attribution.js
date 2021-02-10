@@ -1,19 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import {
-	StyleSheet,
-	Text,
-	View,
-	Image,
-	Linking,
-	TouchableHighlight,
-} from "react-native";
+import { Text, View, Image, Linking, TouchableHighlight } from "react-native";
+
+import Styles from "../Styles";
 
 export default function Attribution({ possibleWord, hasFirstSearch }) {
 	const AttLink = () => {
 		if (hasFirstSearch) {
 			return (
-				<Text style={styles.text}>
+				<Text style={Styles.text}>
 					https://www.wordnik.com/words/{possibleWord}
 				</Text>
 			);
@@ -29,20 +24,10 @@ export default function Attribution({ possibleWord, hasFirstSearch }) {
 			>
 				<Image
 					source={require("../assets/wordnik.png")}
-					style={styles.logo}
+					style={Styles.logo}
 					resizeMode="contain"
 				/>
 			</TouchableHighlight>
 		</View>
 	);
 }
-
-const styles = StyleSheet.create({
-	text: {
-		color: "#fff",
-	},
-	logo: {
-		width: 115,
-		height: 32,
-	},
-});

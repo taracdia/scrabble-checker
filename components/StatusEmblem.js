@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { Text } from "react-native";
+import Styles from "../Styles";
 
 export default function StatusEmblem({
 	hasFirstSearch,
@@ -10,18 +11,12 @@ export default function StatusEmblem({
 	if (!hasFirstSearch) {
 		return null;
 	} else if (isError) {
-		return <Text style={styles.text}>Error</Text>;
+		return <Text style={Styles.text}>Error</Text>;
 	} else if (isLoading) {
-		return <Text style={styles.text}>Loading</Text>;
+		return <Text style={Styles.text}>Loading</Text>;
 	} else if (isWord) {
-		return <Text style={styles.text}>Yes!</Text>;
+		return <Text style={Styles.text}>Yes!</Text>;
 	} else {
-		return <Text style={styles.text}>No!</Text>;
+		return <Text style={Styles.text}>No!</Text>;
 	}
 }
-
-const styles = StyleSheet.create({
-	text: {
-		color: "#fff",
-	},
-});

@@ -14,6 +14,8 @@ import Attribution from "./components/Attribution";
 import StatusEmblem from "./components/StatusEmblem";
 import Definitions from "./components/Definitions";
 
+import Styles from "./Styles";
+
 export default function App() {
 	const [dictDef, setDictDef] = React.useState([]);
 	const [possibleWord, setPossibleWord] = React.useState("");
@@ -314,12 +316,12 @@ export default function App() {
 	};
 
 	return (
-		<View style={styles.container}>
+		<View style={Styles.container}>
 			<TextInput
 				placeholder="Enter here"
 				onChangeText={text => setPossibleWord(text)}
 				defaultValue={possibleWord}
-				style={styles.text}
+				style={Styles.text}
 			/>
 			<Button title="search" onPress={() => dummyButton()}></Button>
 			<StatusEmblem
@@ -338,15 +340,3 @@ export default function App() {
 		</View>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: "#000",
-		alignItems: "center",
-		justifyContent: "center",
-	},
-	text: {
-		color: "#fff",
-	},
-});
