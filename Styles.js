@@ -3,13 +3,14 @@ import { StyleSheet } from "react-native";
 const Styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: "#999",
+		// backgroundColor: "#999",
+		backgroundColor: "black",
 		padding: 20,
-		paddingTop: 40,
+		paddingTop: 60,
 		justifyContent: "space-between",
 	},
 	white: {
-		color: "#fff",
+		color: "white",
 	},
 	logo: {
 		width: 115,
@@ -21,7 +22,7 @@ const Styles = StyleSheet.create({
 	},
 	border: {
 		borderWidth: 1,
-		borderColor: "#f00",
+		borderColor: "red",
 	},
 	invalid: {
 		color: "red",
@@ -34,6 +35,25 @@ const Styles = StyleSheet.create({
 	},
 	hzCenter: {
 		alignItems: "center",
+	},
+	fitToText: {
+		alignSelf: "flex-start",
+	},
+	button: {
+		backgroundColor: "magenta",
+	},
+	searchInput: {
+		flexDirection: "row",
+		marginHorizontal: 10,
+	},
+	vCenterContent: {
+		justifyContent: "center",
+	},
+	fillSpace: {
+		flexGrow: 1,
+	},
+	bold: {
+		fontWeight: "bold",
 	},
 });
 

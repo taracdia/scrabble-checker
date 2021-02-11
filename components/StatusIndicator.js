@@ -11,7 +11,9 @@ export default function StatusIndicator({
 	// if (!hasFirstSearch) {
 	// 	return null;
 	// } else if (isError) {
-	return <Text style={[Styles.invalid, Styles.text]}>Error</Text>;
+	return (
+		<Text style={[Styles.invalid, Styles.text, Styles.bold]}>Error</Text>
+	);
 	// } else if (isLoading) {
 	// 	return (
 	// 		<Image

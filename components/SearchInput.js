@@ -1,32 +1,44 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { View, Button, TextInput } from "react-native";
+import { View, TouchableOpacity, TextInput } from "react-native";
 import { REACT_APP_DICTIONARY_API_KEY } from "@env";
 
 import Styles from "../Styles";
-import FontAwesome, {
-	SolidIcons,
-	RegularIcons,
-	BrandIcons,
-	parseIconFromClassName,
-} from "react-native-fontawesome";
+
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 export default function SearchInput({
 	possibleWord,
 	setPossibleWord,
 	clickButton,
 }) {
-	const parsedIcon = parseIconFromClassName("fab fa-apple");
 	return (
-		<View style={[Styles.border]}>
-			<FontAwesome icon={BrandIcons.android} />
+		//TODO: make it so that you can press enter and the search happens
+		<View style={[Styles.searchInput]}>
 			<TextInput
-				placeholder="Enter here"
+				placeholder="Guess here"
 				onChangeText={text => setPossibleWord(text)}
 				defaultValue={possibleWord}
-				style={[Styles.white, Styles.text]}
+				placeholderTextColor={"gray"}
+				style={[
+					Styles.white,
+					Styles.text,
+					Styles.fillSpace,
+					{ borderColor: "gray", borderWidth: 1 },
+				]}
 			/>
-			<Button title="search" onPress={clickButton}></Button>
+
+			<TouchableOpacity
+				onPress={clickButton}
+				style={[Styles.button, Styles.vCenterContent]}
+			>
+				<FontAwesomeIcon
+					icon={faSearch}
+					size={30}
+					style={[Styles.white, { margin: 8 }]}
+				/>
+			</TouchableOpacity>
 		</View>
 	);
 }

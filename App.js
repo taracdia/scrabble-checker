@@ -321,7 +321,7 @@ export default function App() {
 	};
 
 	return (
-		<View style={[Styles.container, Styles.border]}>
+		<View style={Styles.container}>
 			<SearchInput
 				possibleWord={possibleWord}
 				setPossibleWord={setPossibleWord}
