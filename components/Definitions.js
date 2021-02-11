@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, View, ScrollView } from "react-native";
 import Styles from "../Styles";
 
 export default function Definitions({
@@ -22,19 +22,22 @@ export default function Definitions({
 			);
 		} else {
 			return (
-				<View>
+				<ScrollView>
 					{dictDef.map(def => (
-						<Text style={[Styles.white, Styles.text]} key={def.id}>
+						<Text
+							style={[Styles.white, Styles.text, Styles.padding]}
+							key={def.id}
+						>
 							{def.text}
 						</Text>
 					))}
-				</View>
+				</ScrollView>
 			);
 		}
 	};
 
 	return (
-		<View>
+		<View style={Styles.flex}>
 			<Text style={[Styles.white, Styles.text]}>Definitions:</Text>
 			<DefList />
 		</View>

@@ -7,7 +7,7 @@ export default function Attribution({ possibleWord, hasFirstSearch }) {
 	const AttLink = () => {
 		if (hasFirstSearch) {
 			return (
-				<Text style={[Styles.white]}>
+				<Text style={Styles.white}>
 					https://www.wordnik.com/words/{possibleWord}
 				</Text>
 			);

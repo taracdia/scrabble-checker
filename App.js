@@ -12,15 +12,11 @@ import Styles from "./Styles";
 export default function App() {
 	const [dictDef, setDictDef] = React.useState([]);
 	const [possibleWord, setPossibleWord] = React.useState("");
-
-	// const [isLoading, setIsLoading] = React.useState(false);
-	const [isLoading, setIsLoading] = React.useState(true);
-
+	const [isLoading, setIsLoading] = React.useState(false);
 	const [isError, setIsError] = React.useState(false);
 	const [isWord, setIsWord] = React.useState(false);
 	//This is so that some items are hidden until the first search
-	// const [hasFirstSearch, setHasFirstSearch] = React.useState(false);
-	const [hasFirstSearch, setHasFirstSearch] = React.useState(true);
+	const [hasFirstSearch, setHasFirstSearch] = React.useState(false);
 
 	//TODO: remove
 	const dummyVals = [
@@ -95,7 +91,7 @@ export default function App() {
 			attributionText:
 				"from The American Heritage® Dictionary of the English Language, 5th Edition.",
 			sourceDictionary: "ahd-5",
-			text: "A spherical object or entity.",
+			text: "A spherical object or .",
 			sequence: "2",
 			score: 0,
 			labels: [],
@@ -248,6 +244,9 @@ export default function App() {
 	};
 
 	const clickButton = () => {
+		if (!possibleWord) {
+			return;
+		}
 		setHasFirstSearch(true);
 		Keyboard.dismiss();
 		//Reset states
@@ -321,7 +320,7 @@ export default function App() {
 	};
 
 	return (
-		<View style={Styles.container}>
+		<View style={[Styles.container, Styles.flex]}>
 			<SearchInput
 				possibleWord={possibleWord}
 				setPossibleWord={setPossibleWord}
