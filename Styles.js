@@ -63,9 +63,17 @@ const Styles = StyleSheet.create({
 		padding: 5,
 	},
 	//Attribution
-	logo: {
+	wordnik: {
 		width: 115,
 		height: 32,
+	},
+	mw: {
+		width: 50,
+		height: 50,
+	},
+	attRow: {
+		flexDirection: "row",
+		justifyContent: "space-between",
 	},
 });
 

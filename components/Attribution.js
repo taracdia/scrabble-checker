@@ -20,16 +20,23 @@ export default function Attribution({ possibleWord, hasFirstSearch }) {
 	return (
 		<View>
 			<AttLink />
-			<TouchableHighlight
-				onPress={() => Linking.openURL("https://wordnik.com")}
-				style={Styles.hzCenter}
-			>
+			<View style={Styles.attRow}>
+				<TouchableHighlight
+					onPress={() => Linking.openURL("https://wordnik.com")}
+					style={Styles.hzCenter}
+				>
+					<Image
+						source={require("../assets/wordnik.png")}
+						style={Styles.wordnik}
+						resizeMode="contain"
+					/>
+				</TouchableHighlight>
 				<Image
-					source={require("../assets/wordnik.png")}
-					style={Styles.logo}
+					source={require("../assets/mw.png")}
+					style={Styles.mw}
 					resizeMode="contain"
 				/>
-			</TouchableHighlight>
+			</View>
 		</View>
 	);
 }
