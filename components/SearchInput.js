@@ -1,7 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { View, TouchableOpacity, TextInput } from "react-native";
-import { REACT_APP_DICTIONARY_API_KEY } from "@env";
 
 import Styles from "../Styles";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";

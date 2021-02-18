@@ -4,6 +4,8 @@ import { Text, View, Image, Linking, TouchableHighlight } from "react-native";
 import Styles from "../Styles";
 
 export default function Attribution({ possibleWord, hasFirstSearch }) {
+	//Required for using the APIs
+
 	const AttLink = () => {
 		if (hasFirstSearch) {
 			return (

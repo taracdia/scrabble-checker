@@ -9,7 +9,7 @@ export default function Definitions({
 	isError,
 	dictDef,
 }) {
-	if (!hasFirstSearch || !isWord || isLoading || isError) {
+	if (isLoading || isError || !isWord || !hasFirstSearch) {
 		return null;
 	}
 
@@ -23,12 +23,12 @@ export default function Definitions({
 		} else {
 			return (
 				<ScrollView>
-					{dictDef.map(def => (
+					{dictDef.map((def, index) => (
 						<Text
 							style={[Styles.white, Styles.text, Styles.padding]}
-							key={def.id}
+							key={index}
 						>
-							{def.text}
+							{def}
 						</Text>
 					))}
 				</ScrollView>
