@@ -29,16 +29,19 @@ const Styles = StyleSheet.create({
 		padding: 8,
 		justifyContent: "center",
 	},
-	searchInput: {
+	searchPage: {
 		flexDirection: "row",
 		marginHorizontal: 10,
 	},
-	textInput: {
+	textInputBox: {
 		flexGrow: 1,
+		flexDirection: "row",
 		borderColor: "gray",
 		borderWidth: 1,
 		borderBottomLeftRadius: 5,
 		borderTopLeftRadius: 5,
+		paddingHorizontal: 20,
+		justifyContent: "space-between",
 	},
 	//StatusIndicator
 	bigText: {

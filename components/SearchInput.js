@@ -1,6 +1,5 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { View, TouchableOpacity, TextInput } from "react-native";
+import { View, Text, TouchableOpacity, TextInput } from "react-native";
 
 import Styles from "../Styles";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -12,21 +11,26 @@ export default function SearchInput({
 	clickButton,
 }) {
 	return (
-		<View style={Styles.searchInput}>
-			<TextInput
-				placeholder="Guess here"
-				onChangeText={text => setPossibleWord(text)}
-				defaultValue={possibleWord}
-				placeholderTextColor={"gray"}
-				style={[Styles.white, Styles.text, Styles.textInput]}
-				onSubmitEditing={clickButton}
-				autoCapitalize={"none"}
-			/>
+		<View style={Styles.searchPage}>
+			<View style={Styles.textInputBox}>
+				<TextInput
+					placeholder="Guess here"
+					onChangeText={text => setPossibleWord(text)}
+					defaultValue={possibleWord}
+					placeholderTextColor={"gray"}
+					style={[Styles.white, Styles.text]}
+					onSubmitEditing={clickButton}
+					autoCapitalize={"none"}
+				/>
+				<TouchableOpacity onPress={() => setPossibleWord("")}>
+					<Text style={[Styles.white, Styles.text]}>X</Text>
+				</TouchableOpacity>
+			</View>
 			<TouchableOpacity onPress={clickButton} style={Styles.button}>
 				<FontAwesomeIcon
 					icon={faSearch}
 					size={30}
-					style={[Styles.white]}
+					style={Styles.white}
 				/>
 			</TouchableOpacity>
 		</View>
