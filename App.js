@@ -49,6 +49,7 @@ export default function App() {
 					//This means it isn't a valid scrabble word
 					setIsLoading(false);
 				} else {
+					console.log(res.message)
 					throw new Error();
 				}
 			})
